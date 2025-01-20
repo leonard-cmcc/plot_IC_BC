@@ -9,6 +9,7 @@ import pdb # import the python debugger
 from datetime import datetime, timedelta
 from matplotlib import pylab as pl 
 import traceback
+import matplotlib.pyplot as plt
 
 def plot_bc(variable,timevariable,variablename,pathnamefig):  # define the function plot_bc for bc entry variable timevariable ariablename pathnamefig (same as plot_ic)
         if variablename == 'saltn':
@@ -154,11 +155,11 @@ if __name__ == "__main__":
     print("MAIN --- Starting...")
         
     # change here when needed!
-    pathname = '/home/olabileonard/BOLOGNA/PhD/Research/SHYFEM/init_bound_conditions/input/'  # input path
-    pathnamefig = '/home/olabileonard/BOLOGNA/PhD/Research/SHYFEM/init_bound_conditions/scripts/figures/' # fig path
+    pathname = '.../output/48chunks/'  # input path
+    pathnamefig = '.../figures/48_chunks/' # fig path
 
     #saltin file
-    nk= 7 # number of chunks
+    nk= 48 # number of chunks
     npp= 42517  # Number of points
     nl= 22      # Number of Levels   
     
@@ -174,11 +175,11 @@ timeboundn = np.array([], dtype='datetime64[s]')
 boundn = None
 
 # Loop over each chunk file
-for c in range(1, nk):   # nk is the number of chunks
+for c in range(1, nk + 1):   # nk is the number of chunks
     print(f"MAIN --- BC --- iteration {c}")
     
     # Open the file
-    with open(pathname + 'boundn_1_dd' + str(c) + '.dat') as f_boundn:
+    with open(pathname + 'boundn_1_' + str(c) + '.dat') as f_boundn:
         content = f_boundn.readlines()
     
     # Initialize counters
@@ -228,21 +229,22 @@ fig = pl.figure(figsize=(12,8))
 ax = fig.add_subplot(111)
 print('boundn=',boundn.shape)
 
-ax.set_title('INPUT FILE = boundn_dd.dat (nlevel = 0)',fontsize=18,weight='bold')
-ax.plot(timeboundn,boundn[:,indb[0]],'.-', color='blue', linewidth=2,label='P1(First node)')
-ax.plot(timeboundn,boundn[:,indb[1]],'.-', color='cyan', linewidth=2,label='P2(20 nodes)')
-ax.plot(timeboundn,boundn[:,indb[2]],'.-', linewidth=2, color='black', label='P3(40 nodes)')
-ax.plot(timeboundn,boundn[:,indb[3]],'.-',linewidth=2, color='blueviolet', label='P4(60 nodes)')
-ax.plot(timeboundn,boundn[:,indb[4]],'.-',linewidth=2, color='green', label='P5(90 nodes)')
-ax.set_ylim([-0.8,0.8])
+ax.set_title('INPUT FILE = boundn.dat (nlevel = 0)',fontsize=18,weight='bold')
+ax.plot(timeboundn,boundn[:,indb[0]],'-', color='blue', linewidth=1,label='P1(First node)')
+ax.plot(timeboundn,boundn[:,indb[1]],'-', color='cyan', linewidth=1,label='P2(20 nodes)')
+ax.plot(timeboundn,boundn[:,indb[2]],'-', linewidth=1, color='black', label='P3(40 nodes)')
+ax.plot(timeboundn,boundn[:,indb[3]],'-',linewidth=1, color='blueviolet', label='P4(60 nodes)')
+ax.plot(timeboundn,boundn[:,indb[4]],'-',linewidth=1, color='green', label='P5(90 nodes)')
+ax.set_ylim([-1.2,0.6])
 ax.axhline(0, color='black', linestyle='-', linewidth=1)  # Black dashed horizontal line at y=0
 #pl.title("PO ESTUARY (WATER LEVEL)")
 pl.xlabel("Time")
 pl.ylabel("Water Level (m)")
-#pl.xticks(rotation=45)  # Rotate x-ticks for better readability
+
 # Display the legend
 ax.legend()
 pl.grid(True)
 pl.savefig(pathnamefig+'plot_input_boundn', dpi=300, facecolor='w', edgecolor='w',
       orientation='portrait', transparent=False, bbox_inches='tight', pad_inches=0.1)
 pl.close()
+
