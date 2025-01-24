@@ -72,8 +72,8 @@ $python temp_river_flow.py
 ```
 
 ### plot shyfem partitioning
-To run the script provide the path of shyfem netcdf unstructured output path of partitioning file
+To run the script provide the path of shyfem netcdf unstructured output and the path of partitioning file
 
 ```
-$python show_part3.py .../output.nc .../part144
+$python show_part3.py .../output.nc .../part_elems144
 ```
