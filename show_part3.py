@@ -14,7 +14,7 @@ if len(sys.argv) < 3:
 	print ('Error: Missing argument')
 	print ('Please provide path of shyfem netcdf unstructured output ')
 	print ('and path of partitioning file')
-	sys.exit(1)		
+	sys.exit(1)
 
 shyfem_coord_path 	= sys.argv[1]
 part_path 		= sys.argv[2]
@@ -111,21 +111,11 @@ outfile=f'./{number_of_parts}_partition.png'
 
 if ZOOM:
     outfile=f'./{number_of_parts}_partition_zoom.png'
-    #plt.xlim(12.2,12.4)
-    #plt.ylim(41.6,41.9)
-    #plt.ylim(41.68,41.85)
-    #plt.xlim(12.13,12.30)
-    #plt.ylim(41.70,41.80)
-    #plt.xlim(12.10,12.30)
-    #plt.ylim(41.725,41.775)
-    #plt.xlim(12.20,12.25)
     plt.ylim(44.10,45.4)
     plt.xlim(11.46,13.18)
 
 else:
     pass
-    #plt.ylim(41.20,42.10) #JK
-    #plt.xlim(11.60,12.70) #JK
     #plt.ylim(41.20,41.70) #JK
     #plt.xlim(15.8,16.6) #JK
     plt.ylim(44.20,45.4) #LW
