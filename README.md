@@ -30,6 +30,13 @@ import pdb # import the python debugger
 from datetime import datetime, timedelta
 from matplotlib import pylab as pl 
 import traceback
+import subprocess
+import matplotlib.pyplot as plt
+#from fem_tools import *
+import sys, os
+import re
+from netCDF4 import Dataset
+
 ```
 
 ## Plot the initial, boundary conditions and the atmospheric fields for the surface 
@@ -62,4 +69,11 @@ $python plot_runoff_BC.py
 
 ```
 $python temp_river_flow.py
+```
+
+### plot shyfem partitioning
+To run the script provide the path of shyfem netcdf unstructured output path of partitioning file
+
+```
+$python show_part3.py .../output.nc .../part144
 ```
